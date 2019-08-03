@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col">
+        <div class="float-left">
+            <h2>My Teams</h2>
+        </div>
+        <div class="float-right">
+            <%= link_to "Create Team", new_team_path, class: "btn btn-primary" %>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <% if @teams %>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Is Owner</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @teams.each do |team| %>
+                        <tr>
+                            <td><%= team.id %></td>
+                            <td><%= team.name %></td>
+                            <td><%= team_ownership(team) %></td>
+                            <td>
+                                <%= invite_button(team) %>
+                                <%= link_to "Ledger", "/", class: "btn btn-primary" %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% end %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="float-right">
+            <%= pagy_bootstrap_nav(@pagy).html_safe %>
+        </div>
+    </div>
+</div>

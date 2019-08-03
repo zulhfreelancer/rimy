@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rimy</title>
+    <title>RIMY</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Nav -->
+    <%= render "shared/navbar" %>
+
+    <!-- Content -->
+    <main role="main" class="container">
+      <%= render "shared/notice_and_alert" %>
+      <%= yield %>
+      <%= debug(params) if Rails.env.development? %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">2019 // Zulhilmi Zainudin</span>
+      </div>
+    </footer>
   </body>
 </html>

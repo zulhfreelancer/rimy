@@ -1,0 +1,44 @@
+<!-- Navbar -->
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Wallet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarNavDropdown" class="navbar-collapse collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Wallet</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        My Teams
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <%= link_to "Manage Teams", teams_path, class: "dropdown-item" %>
+                        <%= link_to "Join A Team", join_teams_path, class: "dropdown-item" %>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <% if user_signed_in? %>
+                            <%= link_to('Edit profile', edit_user_registration_path, class: "dropdown-item") %>
+                            <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
+                        <% else %>
+                            <%= link_to('Login', new_user_session_path, class: "dropdown-item") %>
+                        <% end %>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

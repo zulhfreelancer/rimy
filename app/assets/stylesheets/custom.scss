@@ -1,0 +1,28 @@
+.form-control:focus {
+    box-shadow: none;
+}
+
+ul.errors-list {
+    margin-bottom: 0;
+}
+
+.inline-form-submit {
+    margin-top: 2rem;
+}
+
+@mixin box_sizing {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+}
+
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    @include box_sizing;
+    background-color: #d4d4d4;
+    border-radius: 5px;
+    padding: 10px;
+}
