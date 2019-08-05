@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'teams#index'
   devise_for :users
   
   resources :teams, only: [:index, :new, :create] do

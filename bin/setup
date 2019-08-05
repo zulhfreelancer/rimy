@@ -28,6 +28,15 @@ chdir APP_ROOT do
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
 
+  puts "\n== Installing chromedriver for testing =="
+  if RUBY_PLATFORM =~ /darwin/
+    unless system('brew cask ls --versions chromedriver')
+    system('brew cask install chromedriver')
+    end
+  else
+    puts 'You will need to install Chromedriver before using the automated test suite.'
+  end
+
   puts "\n== Restarting application server =="
   system! 'bin/rails restart'
 end
