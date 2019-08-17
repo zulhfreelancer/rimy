@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col">
+        <div class="float-left">
+            <h2><%= "#{@account_type} Accounts"%></h2>
+        </div>
+        <div class="float-right">
+            <%= link_to "Add Account", new_polymorphic_path([@accountable, Account]), class: "btn btn-primary" %>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <% if @accounts %>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Account Number</th>
+                        <th>Code</th>
+                        <th>Balance</th>
+                        <th>Approvals Needed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @accounts.each do |account| %>
+                        <tr>
+                            <td><%= account.account_number %></td>
+                            <td><%= account.asset.code %></td>
+                            <td><%= balance_formatter(account.balance, account.asset.type) %></td>
+                            <td><%= approval_requirement(account) %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% end %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="float-right">
+            <%= pagy_bootstrap_nav(@pagy).html_safe %>
+        </div>
+    </div>
+</div>

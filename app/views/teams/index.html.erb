@@ -18,6 +18,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Is Owner</th>
+                        <th>Members</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -27,9 +28,10 @@
                             <td><%= team.id %></td>
                             <td><%= team.name %></td>
                             <td><%= team_ownership(team) %></td>
+                            <td><%= team.users.size %></td>
                             <td>
                                 <%= invite_button(team) %>
-                                <%= link_to "Ledger", "/", class: "btn btn-primary" %>
+                                <%= link_to "Accounts", polymorphic_path([team, Account]), class: "btn btn-primary" %>
                             </td>
                         </tr>
                     <% end %>

@@ -3,6 +3,7 @@ class TeamInvite < ApplicationRecord
   belongs_to :team
   enum status: { pending: 0, joined: 1 }
 
+  validates :invite_token, presence: true
   validate :cannot_invite_owner, on: :create
 
   def cannot_invite_owner

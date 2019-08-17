@@ -5,7 +5,8 @@ class TeamsController < ApplicationController
     include TeamRegisterer
 
     def index
-        @pagy, @teams = pagy(current_user.teams, page: params[:page], items: 10)
+        teams_with_users = current_user.teams.includes(:users).references(:users)
+        @pagy, @teams = pagy(teams_with_users, page: params[:page], items: 10)
     end
 
     def new

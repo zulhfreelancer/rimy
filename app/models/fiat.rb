@@ -1,0 +1,2 @@
+class Fiat < Asset 
+end

@@ -1,0 +1,1 @@
+ASSET_DECIMAL = 18

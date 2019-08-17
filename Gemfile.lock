@@ -47,8 +47,15 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (9.6.1)
       execjs
+    awesome_print (1.8.0)
     bcrypt (3.1.13)
+    better_errors (2.5.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     bindex (0.8.1)
+    binding_of_caller (0.8.0)
+      debug_inspector (>= 0.0.1)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
     bootstrap (4.3.1)
@@ -70,9 +77,11 @@ GEM
       launchy
     childprocess (1.0.1)
       rake (< 13.0)
+    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     database_cleaner (1.7.0)
+    debug_inspector (0.0.3)
     devise (4.6.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -239,6 +248,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print (~> 1.8)
+  better_errors (~> 2.5, >= 2.5.1)
+  binding_of_caller (~> 0.8.0)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3, >= 4.3.1)
   byebug

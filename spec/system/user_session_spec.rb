@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Sessions', type: :system do
+RSpec.describe 'System > Sessions', type: :system do
   it "signs user in and out" do
     user = create(:user)
     visit new_user_session_path 

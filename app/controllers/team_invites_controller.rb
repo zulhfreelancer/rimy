@@ -30,11 +30,11 @@ class TeamInvitesController < ApplicationController
     end
 
     def confirm_join
+        ignore_if_blank; return if performed?
         ignore_if_not_exist; return if performed?
         ignore_if_joined; return if performed?
         if link_user_and_team(current_user, @invite.team) && @invite.joined!
-            flash[:notice] = "Invitation complete"
-            redirect_to teams_path
+            flash[:notice] = "Invitation complete" and redirect_to teams_path
         end
     end
 
@@ -49,6 +49,13 @@ class TeamInvitesController < ApplicationController
 
     def set_invite 
         @invite = TeamInvite.find_by_invite_token(params[:invite_token])
+    end
+
+    def ignore_if_blank
+        if params[:invite_token].blank?
+            flash[:error] = "Invite can not be blank"
+            render :join and return
+        end
     end
 
     def ignore_if_not_exist
