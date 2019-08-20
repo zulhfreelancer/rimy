@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'System > Sign Up', type: :system do
   it "should create new user account" do     
     visit new_user_registration_path        
+    fill_in 'user_name', with: "abcd"
     fill_in 'user_email', with: "abcd@example.com"    
     fill_in 'user_password', with: "password"    
     fill_in 'user_password_confirmation', with: "password"    
