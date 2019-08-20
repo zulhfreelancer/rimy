@@ -1,0 +1,5 @@
+<%= 
+    link_to "Topup", 
+    new_topup_path(asset_id: account.asset_id, account_number: account.account_number),
+    class: "btn btn-primary" if account.asset.type == "Fiat"
+%>

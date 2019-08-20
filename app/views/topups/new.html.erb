@@ -1,0 +1,12 @@
+<h2 class="text-center">Topup Faker</h2>
+<p class="text-center">This is page serves as <a href="https://bit.ly/what-is-fpx" target="_blank">FPX</a> demo. Click a button below to test topup functionality.</p>
+
+<p class="text-center"><b>Asset Name</b><br><%= @asset_name %></p>
+<p class="text-center"><b>Topup Amount</b><br>100 <%= @asset_code %></p>
+<p class="text-center"><b>Account Number</b><br><%= @account_number %></p>
+
+<center>
+<%= link_to "Cancel", topups_path(account_number: @account_number, asset_id: @asset.id, intent: 'cancel'), method: :post, class: "btn btn-danger" %>
+
+<%= link_to "Proceed", topups_path(account_number: @account_number, asset_id: @asset.id, intent: 'proceed'), method: :post, class: "btn btn-success" %>
+</center>

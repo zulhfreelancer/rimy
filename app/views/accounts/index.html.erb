@@ -19,6 +19,7 @@
                         <th>Code</th>
                         <th>Balance</th>
                         <th>Approvals Needed</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,9 @@
                             <td><%= account.asset.code %></td>
                             <td><%= balance_formatter(account.balance, account.asset.type) %></td>
                             <td><%= approval_requirement(account) %></td>
+                            <td>
+                                <%= render partial: "topup_button", locals: {account: account} %>
+                            </td>
                         </tr>
                     <% end %>
                 </tbody>

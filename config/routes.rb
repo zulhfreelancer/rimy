@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       post 'confirm-join' => 'team_invites#confirm_join', as: 'confirm_join'
     end
   end
+
+  resources :topups, only: [:new, :create]
 end
