@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   end
 
   resources :topups, only: [:new, :create]
+  resources :withdrawals, only: [:new, :create]
 end

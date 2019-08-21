@@ -1,7 +1,7 @@
-# This is not the final implementation of how add cash should be done.
+# This is not the final implementation of how remove cash should be done.
 # I added this class just for the sake of app and demo completeness.
-# The main point here is to trigger transfer function for adding cash.
-class TopupsController < ApplicationController
+# The main point here is to trigger transfer function for removing cash.
+class WithdrawalsController < ApplicationController
 
     before_action :authenticate_user!
     before_action :set_asset
@@ -12,18 +12,13 @@ class TopupsController < ApplicationController
     include Authorizer
 
     def new
-        @asset_name = @asset.name
         @asset_code = @asset.code
         @account_number = @account.account_number
     end
-
+    
     def create
-        if params[:intent] == "cancel"
-            flash[:error] = "Topup cancelled"
-        else
-            # TODO - transfer 100 fiat from 0 address to @account_number
-            flash[:notice] = "Topup success"
-        end
+        # TODO - transfer X fiat from @account_number to 0 address 
+        flash[:notice] = "Withdrawal request submitted"
         redirect_to polymorphic_path([@accountable, Account])
     end
 

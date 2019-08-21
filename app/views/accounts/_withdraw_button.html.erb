@@ -1,0 +1,5 @@
+<%= 
+    link_to "Withdraw", 
+    new_withdrawal_path(asset_id: account.asset_id, account_number: account.account_number),
+    class: "btn btn-danger" if account.asset.type == "Fiat"
+%>

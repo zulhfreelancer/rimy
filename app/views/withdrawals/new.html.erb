@@ -1,0 +1,41 @@
+<%= form_with url: withdrawals_path, local: true do |f| %>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <%= f.label :account_number, "Wallet account number" %>
+            <%= f.text_field :account_number, value: @account_number, readonly: true, class: "form-control" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <%= f.label :amount, "Amount (in #{@asset_code})" %>
+            <%= f.text_field :amount, placeholder: "e.g. 27.18", required: true, class: "form-control" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <center class="withdrawal_arrow">
+                ↓
+            </center>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <%= f.label :beneficiary_bank_name %>
+            <%= f.text_field :beneficiary_bank_name, placeholder: "e.g. Maybank", required: true, class: "form-control" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <%= f.label :beneficiary_bank_acc_num, "Beneficiary bank account number" %>
+            <%= f.text_field :beneficiary_bank_acc_num, placeholder: "e.g. 12345678", required: true, class: "form-control" %>
+        </div>
+    </div>
+    <%= f.hidden_field :asset_id, value: @asset.id %>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <small class="form-text text-muted">Note: Withdrawal might take up to 3 business days. By clicking proceed you agree to the <a href="#">Withdrawal Terms & Conditions</a>.</small><br>
+            <%= link_to "Cancel", :back, class: "btn btn-danger" %>
+            <%= f.submit "Proceed", class: "btn btn-success" %>
+        </div>
+    </div>
+<% end%>

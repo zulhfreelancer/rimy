@@ -31,6 +31,7 @@
                             <td><%= approval_requirement(account) %></td>
                             <td>
                                 <%= render partial: "topup_button", locals: {account: account} %>
+                                <%= render partial: "withdraw_button", locals: {account: account} %>
                             </td>
                         </tr>
                     <% end %>

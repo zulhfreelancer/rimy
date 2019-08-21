@@ -1,8 +1,11 @@
 class AccountsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_accountable
+    before_action :reject_if_unauthorized
     before_action :set_accountable_type, only: [:new]
+    
     include Pagy::Backend
+    include Authorizer
 
     def index
         @pagy, @accounts = pagy(@accountable.accounts.with_assets, page: params[:page], items: 10)
