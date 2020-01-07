@@ -33,7 +33,7 @@ gem 'nokogiri', '~> 1.10', '>= 1.10.4'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Auth
-gem 'devise', '~> 4.6', '>= 4.6.2'
+gem 'devise', '~> 4.7'
 
 # UI
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
