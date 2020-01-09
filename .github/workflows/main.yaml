@@ -7,7 +7,7 @@ jobs:
   rspec-job:
     runs-on: ubuntu-latest
     container:
-      image: zulhfreelancer/ruby_nodejs@b117916b0954
+      image: zulhfreelancer/ruby_nodejs@sha256:b117916b0954
     steps:
       - name: Print stuffs
         run: echo ruby -v
