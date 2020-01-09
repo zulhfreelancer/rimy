@@ -1,5 +1,5 @@
 # .github/workflows/main.yaml
-name: CI
+name: CI Workflows
 
 on: [push]
 
@@ -35,6 +35,14 @@ jobs:
       - name: Install PostgreSQL client
         run: sudo apt-get install libpq-dev
 
+      # cache gems for faster builds
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
+
       - name: Build & create DB
         env:
           # use localhost for the host here because we have specified a container for the job.
@@ -44,7 +52,7 @@ jobs:
           PGPORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
           RAILS_ENV: test
         run: |
-          gem install bundler
+          bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           bin/rails db:setup
 
