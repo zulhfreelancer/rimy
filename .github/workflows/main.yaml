@@ -10,4 +10,4 @@ jobs:
       image: zulhfreelancer/ruby_nodejs@b117916b0954
     steps:
       - name: Print stuffs
-        run: echo ${{ruby -v}}
+        run: echo ruby -v
