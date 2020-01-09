@@ -1,0 +1,66 @@
+# .github/workflows/main.yaml
+name: CI Workflow
+
+on: [push]
+
+jobs:
+  rspec-job:
+    runs-on: ubuntu-latest
+
+    # If you need DB like PostgreSQL then define service below.
+    # Example for Redis can be found here:
+    # https://github.com/actions/example-services/tree/master/.github/workflows
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ""
+          POSTGRES_DB: postgres
+        ports:
+          # will assign a random free host port
+          - 5432/tcp
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.3
+
+      # required to compile pg ruby gem
+      - name: Install PostgreSQL client
+        run: sudo apt-get install libpq-dev
+
+      # cache gems for faster builds
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
+
+      - name: Build & create DB
+        env:
+          # use localhost for the host here because we have specified a container for the job.
+          # If we were running the job on the VM this would be postgres
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
+          RAILS_ENV: test
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bin/rails db:setup
+
+      - name: Run tests
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
+          RAILS_ENV: test
+        run: |
+          bundle exec rspec
