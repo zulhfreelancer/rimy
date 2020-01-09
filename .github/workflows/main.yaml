@@ -9,6 +9,6 @@ jobs:
     container:
       image: zulhfreelancer/ruby_nodejs@b117916b0954
     steps:
-      - name: "Print stuffs"
+      - name: Print stuffs
       - uses: actions/checkout@v2
       - run: echo ${{ruby -v}}
