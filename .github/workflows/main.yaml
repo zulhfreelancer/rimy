@@ -10,4 +10,4 @@ jobs:
       image: zulhfreelancer/ruby_nodejs:latest
     steps:
       - name: Print stuffs
-        run: ruby -v
+        run: ruby -v && node -v
