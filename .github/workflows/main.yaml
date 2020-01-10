@@ -25,7 +25,7 @@ jobs:
       - name: Print working directory and files
         run: pwd && ls -la
       - name: Print environment variables
-        run: echo $HOME && echo $GITHUB_WORKSPACE && echo $WS
+        run: echo $HOME && echo $GITHUB_WORKSPACE
       - name: Wait for database
         run: pg_isready -d "postgresql://postgres:postgres@localhost:5432"
       - uses: actions/cache@v1
@@ -37,5 +37,4 @@ jobs:
       - name: Build & create DB
         run: |
           bundle config path gems
-          bundle install --jobs 4 --retry 3
-          bin/rails db:setup
+          echo $BUNDLE_PATH
