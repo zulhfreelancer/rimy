@@ -12,7 +12,7 @@ jobs:
       PGUSER: postgres
       PGPASSWORD: postgres
       RAILS_ENV: test
-      WS: $GITHUB_WORKSPACE
+      WS: ${{env.GITHUB_WORKSPACE}}
     container:
       image: zulhfreelancer/ruby_nodejs:latest
       volumes:
