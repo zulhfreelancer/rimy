@@ -15,7 +15,7 @@ jobs:
       - name: Check dependency versions
         run: ruby -v && node -v && bundler -v && psql -V
       - name: Wait for database
-        run: pg_isready
+        run: pg_isready -d "postgresql://postgres:postgres@localhost:5432"
       # - uses: actions/cache@v1
       #   with:
       #     path: vendor/bundle
