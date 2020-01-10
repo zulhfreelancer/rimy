@@ -9,7 +9,21 @@ jobs:
     container:
       image: zulhfreelancer/ruby_nodejs:latest
     steps:
+      - uses: actions/checkout@v2
       - name: Start database
         run: service postgresql start
       - name: Check dependency versions
         run: ruby -v && node -v && bundler -v && psql -V
+      - uses: actions/cache@v1 # cache gems for faster builds
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
+      - name: Build & create DB
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bin/rails db:setup
