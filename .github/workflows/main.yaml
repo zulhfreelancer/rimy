@@ -11,10 +11,6 @@ jobs:
       PGHOST: localhost
       PGUSER: postgres
       PGPASSWORD: postgres
-      BUNDLE_CACHE_ALL: true
-      BUNDLE_PATH: /vendor/bundle
-      BUNDLE_CACHE_PATH: /vendor/bundle
-      BUNDLE_BIN: /vendor/bundle
       RAILS_ENV: test
     container:
       image: zulhfreelancer/ruby_nodejs:latest
@@ -39,6 +35,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gem-
       - name: Build & create DB
+        env:
+          BUNDLE_CACHE_ALL: true
+          BUNDLE_PATH: /vendor/bundle
+          BUNDLE_CACHE_PATH: /vendor/bundle
+          BUNDLE_BIN: /vendor/bundle
         run: |
           bundler env
           gem environment
