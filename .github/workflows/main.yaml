@@ -14,6 +14,8 @@ jobs:
         PGUSER: postgres
         PGPASSWORD: postgres
         RAILS_ENV: test
+      volumes:
+        - vendor/bundle:vendor/bundle
     steps:
       - uses: actions/checkout@v2
       - name: Start database
