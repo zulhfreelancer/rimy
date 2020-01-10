@@ -14,7 +14,9 @@ jobs:
         PGUSER: postgres
         PGPASSWORD: postgres
         RAILS_ENV: test
-        VENDOR_PATH: ${{join(env.GITHUB_WORKSPACE, 'vendor/bundle')}}
+        WORKSPACE: $GITHUB_WORKSPACE
+        WORKSPACE2: GITHUB_WORKSPACE
+        # VENDOR_PATH: ${{join(env.GITHUB_WORKSPACE, 'vendor/bundle')}}
       volumes:
         - vendor/bundle:vendor/bundle
     steps:
@@ -26,7 +28,7 @@ jobs:
       - name: Print working directory and files
         run: pwd && ls -la
       - name: Print environment variables
-        run: echo $HOME && echo $GITHUB_WORKSPACE && echo $VENDOR_PATH
+        run: echo $HOME && echo $GITHUB_WORKSPACE && echo $WORKSPACE && echo $WORKSPACE2 && echo $VENDOR_PATH
       # - name: Wait for database
       #   run: pg_isready -d "postgresql://postgres:postgres@localhost:5432"
       # - uses: actions/cache@v1
