@@ -14,6 +14,7 @@ jobs:
       BUNDLE_CACHE_ALL: true
       BUNDLE_PATH: /vendor/bundle
       BUNDLE_CACHE_PATH: /vendor/bundle
+      BUNDLE_BIN: /vendor/bundle
       RAILS_ENV: test
     container:
       image: zulhfreelancer/ruby_nodejs:latest
@@ -28,17 +29,17 @@ jobs:
       - name: Print working directory and files
         run: pwd && ls -la
       - name: Print environment variables
-        run: echo $HOME && echo $GITHUB_WORKSPACE
+        run: echo $HOME && echo $GITHUB_WORKSPACE && echo $BUNDLE_BIN
       - name: Wait for database
         run: pg_isready -d "postgresql://postgres:postgres@localhost:5432"
-      - uses: actions/cache@v1
-        with:
-          path: /vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
-      - name: Build & create DB
-        run: |
-          echo $BUNDLE_PATH
-          bundle install --jobs 4 --retry 3
-          bin/rails db:setup
+      # - uses: actions/cache@v1
+      #   with:
+      #     path: /vendor/bundle
+      #     key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gem-
+      # - name: Build & create DB
+      #   run: |
+      #     echo $BUNDLE_PATH
+      #     bundle install --jobs 4 --retry 3
+      #     bin/rails db:setup
