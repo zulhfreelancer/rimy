@@ -40,6 +40,4 @@ jobs:
             ${{ runner.os }}-gem-
       - name: Build & create DB
         run: |
-          echo $BUNDLE_PATH
-          bundle install --jobs 4 --retry 3 --binstubs="$BUNDLE_BIN"
-          bin/rails db:setup
+          bundler env
