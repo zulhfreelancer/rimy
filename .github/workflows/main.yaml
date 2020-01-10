@@ -15,7 +15,7 @@ jobs:
     container:
       image: zulhfreelancer/ruby_nodejs:latest
       volumes:
-        - gems:/vendor/bundle
+        - /vendor/bundle
     steps:
       - uses: actions/checkout@v2
       - name: Start database
@@ -30,7 +30,7 @@ jobs:
         run: pg_isready -d "postgresql://postgres:postgres@localhost:5432"
       - uses: actions/cache@v1
         with:
-          path: gems
+          path: /vendor/bundle
           key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gem-
