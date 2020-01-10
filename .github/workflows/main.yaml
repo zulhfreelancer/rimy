@@ -36,5 +36,5 @@ jobs:
             ${{ runner.os }}-gem-
       - name: Build & create DB
         run: |
-          bundle config path gems
+          bundle config path /vendor/bundle
           echo $BUNDLE_PATH
