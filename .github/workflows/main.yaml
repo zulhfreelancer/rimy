@@ -14,20 +14,22 @@ jobs:
         run: service postgresql start
       - name: Check dependency versions
         run: ruby -v && node -v && bundler -v && psql -V
-      - uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
-      - name: Build & create DB
-        env:
-          # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
-          PGHOST: localhost
-          PGUSER: postgres
-          PGPASSWORD: ""
-          RAILS_ENV: test
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-          bin/rails db:setup
+      - name: Wait for database
+        run: pg_isready
+      # - uses: actions/cache@v1
+      #   with:
+      #     path: vendor/bundle
+      #     key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gem-
+      # - name: Build & create DB
+      #   env:
+      #     # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
+      #     PGHOST: localhost
+      #     PGUSER: postgres
+      #     PGPASSWORD: ""
+      #     RAILS_ENV: test
+      #   run: |
+      #     bundle config path vendor/bundle
+      #     bundle install --jobs 4 --retry 3
+      #     bin/rails db:setup
