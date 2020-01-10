@@ -9,5 +9,7 @@ jobs:
     container:
       image: zulhfreelancer/ruby_nodejs:latest
     steps:
-      - name: Print stuffs
-        run: ruby -v && node -v
+      - name: Start database
+        run: service postgresql start
+      - name: Check dependency versions
+        run: ruby -v && node -v && bundler -v && psql -V
