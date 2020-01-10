@@ -8,12 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: zulhfreelancer/ruby_nodejs:latest
+      env:
+        # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
+        PGHOST: localhost
+        PGUSER: postgres
+        PGPASSWORD: postgres
+        RAILS_ENV: test
     steps:
       - uses: actions/checkout@v2
       - name: Start database
         run: service postgresql start
       - name: Check dependency versions
         run: ruby -v && node -v && bundler -v && psql -V
+      - name: Print working directory and files
+        run: pwd && ls -la
       - name: Wait for database
         run: pg_isready -d "postgresql://postgres:postgres@localhost:5432"
       - uses: actions/cache@v1
@@ -23,12 +31,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gem-
       - name: Build & create DB
-        env:
-          # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
-          PGHOST: localhost
-          PGUSER: postgres
-          PGPASSWORD: postgres
-          RAILS_ENV: test
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
