@@ -11,6 +11,7 @@ jobs:
       PGHOST: localhost
       PGUSER: postgres
       PGPASSWORD: postgres
+      BUNDLE_PATH: /vendor/bundle
       RAILS_ENV: test
     container:
       image: zulhfreelancer/ruby_nodejs:latest
@@ -36,5 +37,4 @@ jobs:
             ${{ runner.os }}-gem-
       - name: Build & create DB
         run: |
-          bundle config path /vendor/bundle
           echo $BUNDLE_PATH
