@@ -25,6 +25,7 @@ jobs:
           # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
           PGHOST: localhost
           PGUSER: postgres
+          PGPASSWORD: ""
           RAILS_ENV: test
         run: |
           bundle config path vendor/bundle
