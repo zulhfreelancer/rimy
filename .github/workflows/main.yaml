@@ -40,6 +40,7 @@ jobs:
           BUNDLE_PATH: /vendor/bundle
           BUNDLE_CACHE_PATH: /vendor/bundle
           BUNDLE_BIN: /vendor/bundle
+          GEM_HOME: /vendor/bundle
         run: |
           bundler env
           gem environment
