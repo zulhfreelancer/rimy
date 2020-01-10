@@ -6,13 +6,15 @@ on: [push]
 jobs:
   rspec-job:
     runs-on: ubuntu-latest
+    steps:
+     - name: Hello world
+      run: echo Hello!
     env:
       # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
       PGHOST: localhost
       PGUSER: postgres
       PGPASSWORD: postgres
       RAILS_ENV: test
-      WS: ${{env.GITHUB_WORKSPACE}}
     container:
       image: zulhfreelancer/ruby_nodejs:latest
       volumes:
