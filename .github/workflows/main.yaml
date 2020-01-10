@@ -6,16 +6,15 @@ on: [push]
 jobs:
   rspec-job:
     runs-on: ubuntu-latest
+    env:
+      # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      RAILS_ENV: test
+      WS: $GITHUB_WORKSPACE
     container:
       image: zulhfreelancer/ruby_nodejs:latest
-      env:
-        # Docs: https://www.postgresql.org/docs/11/libpq-envars.html
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: postgres
-        RAILS_ENV: test
-        WORKSPACE2: ${{GITHUB_WORKSPACE}}
-        # VENDOR_PATH: ${{join(env.GITHUB_WORKSPACE, 'vendor/bundle')}}
       volumes:
         - vendor/bundle:vendor/bundle
     steps:
@@ -27,7 +26,7 @@ jobs:
       - name: Print working directory and files
         run: pwd && ls -la
       - name: Print environment variables
-        run: echo $HOME && echo $GITHUB_WORKSPACE && echo $WORKSPACE2 && echo $VENDOR_PATH
+        run: echo $HOME && echo $GITHUB_WORKSPACE && echo $WS
       # - name: Wait for database
       #   run: pg_isready -d "postgresql://postgres:postgres@localhost:5432"
       # - uses: actions/cache@v1
