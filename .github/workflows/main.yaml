@@ -12,11 +12,14 @@ jobs:
       PGUSER: postgres
       PGPASSWORD: postgres
       RAILS_ENV: test
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     container:
-      image: docker://docker.pkg.github.com/zulhfreelancer/ruby_nodejs/ruby-2.6.3:latest
+      image: docker://docker.pkg.github.com/zulhfreelancer/rimy/ruby-rimy-2.6.3:latest
       volumes:
         - /vendor/bundle
     steps:
+      - name: Print GITHUB_TOKEN
+        run: echo $GITHUB_TOKEN
       - uses: actions/checkout@v2
       - name: Start database
         run: service postgresql start
