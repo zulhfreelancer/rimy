@@ -41,6 +41,9 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'devise-bootstrap-views', '~> 1.1'
 gem 'pagy', '~> 3.4', '>= 3.4.1'
 
+# To test GitHub Actions cache
+gem 'fog-aws', '~> 3.5', '>= 3.5.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
