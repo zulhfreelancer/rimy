@@ -14,7 +14,7 @@ jobs:
       RAILS_ENV: test
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     container:
-      image: docker://docker.pkg.github.com/zulhfreelancer/rimy/ruby-rimy-2.6.3:latest
+      image: zulhfreelancer/ruby_nodejs:latest
       volumes:
         - /vendor/bundle
     steps:
