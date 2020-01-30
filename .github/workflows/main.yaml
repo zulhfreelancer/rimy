@@ -13,7 +13,7 @@ jobs:
       PGPASSWORD: postgres
       RAILS_ENV: test
     container:
-      image: docker.pkg.github.com/zulhfreelancer/ruby_nodejs/ruby-2.6.3:latest
+      image: docker://docker.pkg.github.com/zulhfreelancer/ruby_nodejs/ruby-2.6.3:latest
       volumes:
         - /vendor/bundle
     steps:
