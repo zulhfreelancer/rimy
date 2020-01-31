@@ -14,7 +14,7 @@ jobs:
       RAILS_ENV: test
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     container:
-      image: zulhfreelancer/ruby_nodejs:latest
+      image: docker://registry.gitlab.com/zulhfreelancer/ruby_nodejs:latest
       volumes:
         - /vendor/bundle
     steps:
